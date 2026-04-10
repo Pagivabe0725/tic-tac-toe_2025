@@ -230,6 +230,8 @@ export class Account implements OnInit {
       { maxRetries: 3, initialDelay: 100 }
     );
 
+    console.log(result)
+
     // Extract data from response
     const gamesData = (result as any)?.data?.games;
 

@@ -41,7 +41,9 @@ div {
   height: 80%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-inline: 20px;
   width: 40%;
   border-radius: 1000px;
 }

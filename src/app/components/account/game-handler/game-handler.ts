@@ -71,6 +71,7 @@ export class GameHandler {
    */
   protected async loadGame(id: string): Promise<void> {
     const chosenGame = this.savedGames()?.find((game) => game.gameId === id);
+    console.log(chosenGame)
     const dialogResult = await this.#dialogHandler.open<true | 'CLOSE_EVENT'>(
       'message',
       {
