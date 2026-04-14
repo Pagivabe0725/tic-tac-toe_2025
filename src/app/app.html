@@ -6,6 +6,10 @@
   <app-snack-bar/>
 }
 
+@if (isSidebarOpen() && width()<=600) {
+  <app-sidebar></app-sidebar>
+}
+
 <div role="application">
   <header appHeader>
    

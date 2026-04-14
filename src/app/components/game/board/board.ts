@@ -70,7 +70,7 @@ export class Board implements OnInit {
   #cellStructure: Signal<string[][]> = computed(() => {
     const size = this.size();
     return Array.from({ length: size }, () =>
-      Array.from({ length: size }, () => '')
+      Array.from({ length: size }, () => 'e'),
     );
   });
 
@@ -98,7 +98,7 @@ export class Board implements OnInit {
    * @returns The content cast as a game markup.
    */
   protected formatFieldContent(content: string): GameInfo['actualMarkup'] {
-    return content as GameInfo['actualMarkup'];
+    return content ==='e' ? undefined : content as GameInfo['actualMarkup'] 
   }
 
   /**
@@ -138,7 +138,7 @@ export class Board implements OnInit {
     effect(() => {
       if (this.step()) {
         this.#store.dispatch(
-          modifyGameInfo({ actualMarkup: this.step() % 2 === 0 ? 'o' : 'x' })
+          modifyGameInfo({ actualMarkup: this.step() % 2 === 0 ? 'o' : 'x' }),
         );
         this.#store.dispatch(modifyGameInfo({ actualBoard: this.gameField() }));
       }
@@ -172,8 +172,8 @@ export class Board implements OnInit {
     const contentName = !content
       ? 'empty'
       : content === 'x'
-      ? 'cross'
-      : 'circle';
+        ? 'cross'
+        : 'circle';
     return `${contentName} at row ${coordinates.xCoordinate + 1}, column ${
       coordinates.yCoordinate + 1
     }.`;

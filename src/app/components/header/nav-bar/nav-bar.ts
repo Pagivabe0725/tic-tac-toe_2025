@@ -16,6 +16,7 @@ import { selectGameSettings } from '../../../store/selectors/game-settings.selec
 import { Functions } from '../../../services/functions.service';
 import { Http } from '../../../services/http.service';
 import { resetGameInfoResults } from '../../../store/actions/game-info-results-reset.action';
+import { modifySidebar } from '../../../store/actions/sidebar-modify.action';
 
 @Component({
   selector: 'div[appNavbar]',
@@ -54,6 +55,10 @@ export class NavBar {
    */
   logged: Signal<boolean> = computed(() => {
     return !!this.#auth.user();
+  });
+
+  readonly width = computed(() => {
+    return this.#theme.width() ?? 599;
   });
 
   /** Button configuration for toggling between light and dark theme */
@@ -167,7 +172,7 @@ export class NavBar {
             lastMove: gameInfo.lastMove,
             status,
             difficulty: this.#helperFunctions.numberToDifficulty(
-              gameSetting.hardness
+              gameSetting.hardness,
             ),
             opponent: gameSetting.opponent,
             size: gameSetting.size,
@@ -178,12 +183,12 @@ export class NavBar {
               'post',
               'game/create-game',
               body,
-              { maxRetries: 3, initialDelay: 100 }
+              { maxRetries: 3, initialDelay: 100 },
             );
             if ((result as any).userId) {
               this.#snackbarHandler.addElement(
                 'Game saved successfully',
-                false
+                false,
               );
             } else {
               this.#snackbarHandler.addElement('Game saving failed', true);
@@ -210,7 +215,7 @@ export class NavBar {
           {
             title: 'Settings',
             content: 'setting',
-          }
+          },
         );
         if (dialogResult && dialogResult !== 'CLOSE_EVENT') {
           this.#snackbarHandler.addElement('Settings updated', false);
@@ -243,7 +248,7 @@ export class NavBar {
           const user = await this.#auth.signup(
             dialogResult.email,
             dialogResult.password,
-            dialogResult.rePassword
+            dialogResult.rePassword,
           );
           if (user) {
             this.#snackbarHandler.addElement('Registration successful', false);
@@ -257,7 +262,7 @@ export class NavBar {
         ) {
           const user = await this.#auth.login(
             dialogResult.email,
-            dialogResult.password
+            dialogResult.password,
           );
           if (user) {
             this.#auth.user = user;
@@ -287,7 +292,7 @@ export class NavBar {
               { button: 'accept', name: 'Logout' },
               { button: 'reject', name: 'Back' },
             ],
-          }
+          },
         );
 
         if (dialogResult && dialogResult !== 'CLOSE_EVENT') {
@@ -298,7 +303,7 @@ export class NavBar {
               this.#auth.user = undefined;
               this.#snackbarHandler.addElement(
                 'Logged out successfully',
-                false
+                false,
               );
               this.#store.dispatch(resetGameInfoResults());
               this.#store.dispatch(reserGameInfo());
@@ -325,5 +330,7 @@ export class NavBar {
     this.#logoutButton(),
   ]);
 
-
+  protected openSidebar(): void {
+    this.#store.dispatch(modifySidebar({ isOpen: true }));
+  }
 }

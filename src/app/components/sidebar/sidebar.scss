@@ -1,0 +1,57 @@
+div {
+  box-sizing: border-box;
+  background: linear-gradient(45deg, var(--p-60), var(--a-60));
+  height: 100vh;
+  width: 45vw;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  border-left: 5px outset var(--p-80);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+  align-items: center;
+  gap: 10px;
+
+  button {
+    width: 95%;
+    border-radius: 1000px;
+    background-color: var(--theme-background);
+    font-size: 4vw;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      background-color: var(--a-10);
+      scale: 1.05;
+    }
+
+    &:active{
+      scale: 0.95;
+    }
+  }
+}
+
+#own-sidebar-close-button {
+  margin-bottom: 10px;
+  background: none;
+  width: min-content;
+  align-self: flex-start;
+  border: none;
+
+  &:hover{
+    scale: 1.2;
+  }
+
+  &:active{
+    scale: 0.95;
+  }
+}

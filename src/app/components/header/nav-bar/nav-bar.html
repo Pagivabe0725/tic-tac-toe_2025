@@ -1,13 +1,31 @@
 
 
-@for (button of buttons(); track $index) {
-    @let actualButton = button ;
-    @if (actualButton!.condition) {
-        <button
-        appHeaderButton
-        (click)="actualButton!.action()"
-        [attr.aria-label]="actualButton!.ariaLabel"
-        [iconPath]="actualButton!.iconPath"
-        ></button>
+
+@if (width()> 600) {
+    @for (button of buttons(); track $index) {
+        @let actualButton = button ;
+        @if (actualButton!.condition) {
+            <button
+            appHeaderButton
+            (click)="actualButton!.action()"
+            [attr.aria-label]="actualButton!.ariaLabel"
+            [iconPath]="actualButton!.iconPath"
+            ></button>
+        }
     }
+}
+@else {
+    <button
+    (click)="openSidebar()"
+    id="nav-bar-sidebar-trigger">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 -960 960 960"
+            width="24"
+            height="24"
+            fill="currentColor"
+             aria-hidden="true">
+            <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
+        </svg>
+    </button>
 }

@@ -1,9 +1,7 @@
 import { Component, inject, Signal } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NavBar } from './nav-bar/nav-bar';
-import {
-  selectGameWinner,
-} from '../../store/selectors/game-info.selector';
+import { selectGameWinner } from '../../store/selectors/game-info.selector';
 import { GameInfo } from '../../utils/interfaces/game-info.interface';
 import { reserGameInfo } from '../../store/actions/game-info-reset.action';
 

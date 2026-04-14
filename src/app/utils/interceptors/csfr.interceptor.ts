@@ -31,8 +31,6 @@ export const csrfInterceptor: HttpInterceptorFn = (
         withCredentials: true,
         setHeaders: { 'X-CSRF-Token': token ?? '' },
       });
-      console.log('modified');
-      console.log(modified);
       return next(modified);
     })
   );

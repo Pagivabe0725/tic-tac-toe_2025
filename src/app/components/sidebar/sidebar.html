@@ -1,0 +1,45 @@
+<div @toggle>
+  <button
+    id="own-sidebar-close-button"
+    (click)="closeSidebar()"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="36px"
+      viewBox="0 -960 960 960"
+      width="36px"
+    >
+      <path
+        d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+      />
+    </svg>
+  </button>
+
+  @if (isAuthenticated()) {
+    @if (isAuthPage()) {
+      <button (click)="navigate()">Back</button>
+    }
+    @else {
+      <button (click)="navigate()">Account</button>
+    }
+  }
+
+  <button (click)="toggleMode()">{{inverseMode()}}</button>
+  
+  <button (click)="gameSettingDialog()">game settings</button>
+  
+  @if (!isAuthPage() && isAuthenticated()) {
+  <button (click)="saveDialog()">save</button>
+  }
+
+  <button (click)="settingDialog()">settings</button>
+  
+  @if (!isAuthenticated()) {
+    <button (click)="authDialog()" >login</button>
+  }
+  @else {
+    <button (click)="logoutDialog()">logout</button>
+  }
+
+  
+</div>

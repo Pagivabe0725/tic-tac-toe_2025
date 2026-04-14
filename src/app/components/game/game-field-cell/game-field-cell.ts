@@ -109,7 +109,7 @@ export class GameFieldCell {
       this.#store.dispatch(
         modifyGameInfo({
           lastMove: { row: this.row, column: this.column },
-        })
+        }),
       );
 
       // Optional: emit the coordinates to parent components if needed

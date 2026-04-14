@@ -60,7 +60,7 @@ export class GameHandler {
   private calculateActualStep(board: string[][]) {
     return board.reduce(
       (acc, row) =>
-        acc + row.reduce((rowAcc, cell) => rowAcc + (cell !== '' ? 1 : 0), 0),
+        acc + row.reduce((rowAcc, cell) => rowAcc + (cell !== 'e' ? 1 : 0), 0),
       0
     );
   }

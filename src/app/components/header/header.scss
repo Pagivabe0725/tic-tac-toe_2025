@@ -8,7 +8,9 @@
   height: clamp(70px, 8vh, 200px);
   border-radius: 1000px;
   box-sizing: border-box;
-  box-shadow: 1px 1px 8px var(--a-10), -1px -1px 8px var(--p-10);
+  box-shadow:
+    1px 1px 8px var(--a-10),
+    -1px -1px 8px var(--p-10);
   overflow: hidden;
   margin: 0;
   display: flex;
@@ -48,6 +50,7 @@ div {
   border-radius: 1000px;
 }
 
+
 @media (max-width: 1400px) {
   #own-app-ephasize-div {
     width: 70%;
@@ -57,11 +60,34 @@ div {
   #own-app-ephasize-div {
     width: 95%;
     justify-content: space-between;
-    padding: 0 1px;
+    padding-inline: 20px;
   }
 }
 @media (max-width: 600px) {
+  :host {
+    justify-content: space-between;
+    padding-inline: 10px;
+    gap: 10px;
+  }
+
+  #own-first-container-div {
+    padding: 0;
+  }
+
   #own-app-ephasize-div {
     width: 100%;
   }
+
+  #own-second-container-div {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--theme-background);
+    height: 80%;
+    align-self: center;
+    border-radius: 1000px;
+    padding: 0;
+  }
+
 }

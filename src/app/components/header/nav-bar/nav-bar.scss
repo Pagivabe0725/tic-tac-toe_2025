@@ -10,6 +10,30 @@
   box-sizing: border-box;
 }
 
+#nav-bar-sidebar-trigger {
+  display: flex;
+  width: max-content;
+  height: max-content;
+  background-color: var(--theme-background);
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    scale: 1.5;
+  }
+
+  &:active {
+    scale: 1.2;
+  }
+
+  svg {
+    fill: var(--p-80);
+  }
+}
+
 @media (max-width: 1200px) {
   :host {
     width: 70% !important ;
@@ -30,7 +54,8 @@
 }
 
 @media (max-width: 600px) {
-  :host {
-    display: none !important ;
+  :host{
+    justify-content: center;
+    align-items: center;
   }
 }

@@ -71,7 +71,7 @@ export class GameDisplayPart implements OnInit {
    * Formatted timer string (hh:mm:ss) computed from `seconds`.
    */
   protected time = computed(() =>
-    new Date(this.seconds() * 1000).toISOString().slice(11, 19)
+    new Date(this.seconds() * 1000).toISOString().slice(11, 19),
   );
 
   /** Displayed win count for this player. */
@@ -113,7 +113,7 @@ export class GameDisplayPart implements OnInit {
     this.seconds.set(
       this.#store.selectSignal(selectPlayersSpentTimes)()?.[
         this.markup === 'o' ? 'player_O' : 'player_X'
-      ] ?? 0
+      ] ?? 0,
     );
   }
 
@@ -168,7 +168,7 @@ export class GameDisplayPart implements OnInit {
       this.#store.dispatch(
         modifyGameInfo({
           playerSpentTime: { ...originalTimeObject, ...newSpentTimes },
-        })
+        }),
       );
     });
 

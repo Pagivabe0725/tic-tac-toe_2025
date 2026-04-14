@@ -229,7 +229,7 @@ describe('Board', () => {
       for (let i = 0; i < size; i++) {
         for (let j = 0; j < size; j++) {
           const field =
-            board[i][j] === ''
+            board[i][j] === 'e'
               ? 'empty'
               : board[i][j] === 'x'
               ? 'cross'

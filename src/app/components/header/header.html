@@ -1,16 +1,12 @@
 <div id="own-first-container-div">
-  
   @if (winner()) {
-    <div id="own-app-ephasize-div" aria-live="polite">
-      <span>Winner: "{{winner()}}"</span>
-      <button (click)="startNewGame()" class="own-basic-button">New game</button>
-    </div>
-  } 
-
-  @else {
-    <h1>Let's play</h1>
+  <div id="own-app-ephasize-div" aria-live="polite">
+    <span>Winner: "{{winner()}}"</span>
+    <button (click)="startNewGame()" class="own-basic-button">New game</button>
+  </div>
+  } @else {
+  <h1>Let's play</h1>
   }
-
 </div>
 
 <div id="own-second-container-div">

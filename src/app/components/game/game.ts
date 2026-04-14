@@ -97,7 +97,7 @@ export class Game implements OnInit {
 
   /** Markup ('x' or 'o') of the player whose turn it is. */
   #actualMarkup: Signal<GameInfo['actualMarkup']> = this.#store.selectSignal(
-    selectActualMarkup
+    selectActualMarkup,
   ) as Signal<GameInfo['actualMarkup']>;
 
   /** Indicates whether the game has officially started. */
@@ -239,16 +239,16 @@ export class Game implements OnInit {
         board,
         this.actualMarkup()!,
         this.#hardness()!,
-        this.#lastMove()!
+        this.#lastMove()!,
       );
 
       if (result?.winner) {
         this.#store.dispatch(
-          modifyGameInfo({ winner: result.winner, started: false })
+          modifyGameInfo({ winner: result.winner, started: false }),
         );
         if (result.winner === 'o' || result.winner === 'x') {
           this.#store.dispatch(
-            modifyGameInfo({ actualMarkup: result.winner as 'o' | 'x' })
+            modifyGameInfo({ actualMarkup: result.winner as 'o' | 'x' }),
           );
         }
       }
@@ -274,7 +274,7 @@ export class Game implements OnInit {
       const incomingBoard = await this.#gameLogic.hasWinner(board);
       if (incomingBoard?.winner) {
         this.#store.dispatch(
-          modifyGameInfo({ winner: incomingBoard.winner, started: false })
+          modifyGameInfo({ winner: incomingBoard.winner, started: false }),
         );
       }
     }
@@ -320,7 +320,6 @@ export class Game implements OnInit {
     const winner = this.#winner();
 
     if (winner === 'o') {
-
       this.#auth.updateUser({ winNumber: (user?.winNumber ?? 0) + 1 });
     } else if (winner === 'x') {
       this.#auth.updateUser({ loseNumber: (user?.loseNumber ?? 0) + 1 });
