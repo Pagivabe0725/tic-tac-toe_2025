@@ -53,15 +53,21 @@ export class GameHandler {
   deletedGameEvent: OutputEmitterRef<string> = output();
 
   /**
-   * Calculates the number of moves already made on a game board
-   * @param board - 2D array representing the game board
-   * @returns Number of non-empty cells (moves)
+   * Calculates the number of performed moves on the game board.
+   *
+   * Counts all cells that are not empty (`'e'`). If the board is
+   * `null` or `undefined`, the method returns `0`.
+   *
+   * @param board - Two-dimensional array representing the game board.
+   * @returns Number of non-empty cells (performed moves).
    */
-  private calculateActualStep(board: string[][]) {
+  private calculateActualStep(board: string[][] | null | undefined) {
+    if (!board) return 0;
+
     return board.reduce(
       (acc, row) =>
         acc + row.reduce((rowAcc, cell) => rowAcc + (cell !== 'e' ? 1 : 0), 0),
-      0
+      0,
     );
   }
 
@@ -71,7 +77,6 @@ export class GameHandler {
    */
   protected async loadGame(id: string): Promise<void> {
     const chosenGame = this.savedGames()?.find((game) => game.gameId === id);
-    console.log(chosenGame)
     const dialogResult = await this.#dialogHandler.open<true | 'CLOSE_EVENT'>(
       'message',
       {
@@ -81,7 +86,7 @@ export class GameHandler {
           { button: 'accept', name: 'Load' },
           { button: 'reject', name: 'Back' },
         ],
-      }
+      },
     );
 
     if (!chosenGame || dialogResult === 'CLOSE_EVENT') return;
@@ -91,9 +96,9 @@ export class GameHandler {
         size: chosenGame.size,
         opponent: chosenGame.opponent,
         hardness: this.#helperFunctions.difficultyToNumber(
-          chosenGame.difficulty
+          chosenGame.difficulty,
         ),
-      })
+      }),
     );
 
     const actualStep = this.calculateActualStep(chosenGame.board);
@@ -104,7 +109,7 @@ export class GameHandler {
         actualMarkup: this.#helperFunctions.markupByStep(actualStep),
         lastMove: chosenGame.lastMove,
         loadedGameName: chosenGame.name,
-      })
+      }),
     );
 
     this.#router.navigateTo(['tic-tac-toe']);
@@ -125,7 +130,7 @@ export class GameHandler {
           { button: 'accept', name: 'Delete' },
           { button: 'reject', name: 'Back' },
         ],
-      }
+      },
     );
 
     if (dialogResult !== 'CLOSE_EVENT') {
