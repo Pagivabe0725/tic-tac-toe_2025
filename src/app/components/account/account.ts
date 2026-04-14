@@ -169,7 +169,7 @@ export class Account implements OnInit {
     userId: string,
     page: number,
     order: GameOrder,
-    status: savedGameStatus | null
+    status: savedGameStatus | null,
   ): object {
     const orderElements = this.splitOrder(order);
     return {
@@ -219,7 +219,7 @@ export class Account implements OnInit {
       this.#auth.user()!.userId,
       this.page(),
       this.order(),
-      this.filter()
+      this.filter(),
     );
 
     // Send GraphQL request with retry mechanism
@@ -227,12 +227,13 @@ export class Account implements OnInit {
       'post',
       'graphql/game',
       body,
-      { maxRetries: 3, initialDelay: 100 }
+      { maxRetries: 3, initialDelay: 100 },
     );
 
     // Extract data from response
     const gamesData = (result as any)?.data?.games;
 
+    console.log(gamesData);
     if (!gamesData) {
       // No games returned: reset pageCount and savedGames
       this.pageCount.set(0);
