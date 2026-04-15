@@ -48,8 +48,25 @@ div {
   padding-inline: 20px;
   width: 40%;
   border-radius: 1000px;
-}
+  font-weight: 900;
+  button {
+    background-color: var(--a-10);
+    font-weight: 900;
+    height: 70%;
+    border-radius: 1000px;
+    border-color: var(--a-40);
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
 
+    &:hover{
+      scale: 1.05;
+    }
+
+    &:active{
+      scale: 0.95;
+    }
+  }
+}
 
 @media (max-width: 1400px) {
   #own-app-ephasize-div {
@@ -89,5 +106,4 @@ div {
     border-radius: 1000px;
     padding: 0;
   }
-
 }
